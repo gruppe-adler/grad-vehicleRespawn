@@ -11,9 +11,8 @@ private _vehPos = 		 getPos _vehObj;
 private _vehType = 		 typeOf _vehObj;
 private _displayName = 	 getText(configFile >> "CfgVehicles" >> _vehType >> "displayName");
 
-diag_log format ["GRAD_simpleVehicleRespawn: adding %1 to respawn, respawns when not dead: %2", _displayName, _respawnWhenNotDead];
+diag_log format ["grad-vehicleRespawn: adding %1 to respawn, respawns when not dead: %2", _displayName, _respawnWhenNotDead];
 
-// 5
 [{
 	params ["_args", "_handle"];
 	_args params ["_vehObj", "_respawnWhenNotDead", "_vehType", "_vehDir", "_vehPos", "_displayName", "_customCode"];
@@ -22,23 +21,19 @@ diag_log format ["GRAD_simpleVehicleRespawn: adding %1 to respawn, respawns when
 			[_handle] call CBA_fnc_removePerFrameHandler;
 	};
 
-
 	// diag_log format ["checking %1 for respawn", _displayName];
-
-
 	if (
 			_respawnWhenNotDead &&
 			{ ( alive _vehObj ) }
 		) exitWith {
 
-			diag_log format ["checking vehicle %1 for respawn", _vehObj];
+			diag_log format ["grad-vehicleRespawn: checking vehicle %1 for respawn", _vehObj];
 			[_vehType, _respawnWhenNotDead, _vehDir, _vehPos, _handle, _customCode] call GRAD_simpleVehicleRespawn_fnc_check;
 	};
 
-
 	if ( !( alive _vehObj ) || { !( canMove _vehObj ) } ) exitWith {
 
-			diag_log format ["vehicle %1 dead", _vehObj];
+			diag_log format ["grad-vehicleRespawn: vehicle %1 dead", _vehObj];
 			[_vehType, _respawnWhenNotDead, _vehDir, _vehPos, _handle, _customCode] call GRAD_simpleVehicleRespawn_fnc_check;
 	};
 

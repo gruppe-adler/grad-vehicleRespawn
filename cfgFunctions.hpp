@@ -1,7 +1,7 @@
 class GRAD_simpleVehicleRespawn {
 
 	class server {
-		file = grad_simpleVehicleRespawn\functions\server;
+		file = grad-vehicleRespawn\functions\server;
 
 	    class add;
 	    class check;
