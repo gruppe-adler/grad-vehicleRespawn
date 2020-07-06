@@ -4,7 +4,6 @@ class GRAD_simpleVehicleRespawn {
 		file = grad_simpleVehicleRespawn\functions\server;
 
 	    class add;
-	    class addSearchLightAction;
 	    class check;
 	    class config;
 	    class spawn;

@@ -1,4 +1,4 @@
-params ["_vehType", "_vehDir", "_vehPos", "_handle"];
+params ["_vehType", "_respawnWhenNotDead", "_vehDir", "_vehPos", "_handle", "_customCode"];
 
 if ( _veh distance _vehPos > (sizeOf _vehType)) exitWith { diag_log format ["too close to original position"]; };
 
@@ -12,5 +12,5 @@ if (_isRoom) then {
     diag_log format ["there is room, removing handle", _positionEmpty];
 
     [_handle] call CBA_fnc_removePerFrameHandler;
-    [_vehType, _vehPos, _vehDir] call GRAD_simpleVehicleRespawn_fnc_spawn;
+    [_vehType, _respawnWhenNotDead, _vehPos, _vehDir, _customCode] call GRAD_simpleVehicleRespawn_fnc_spawn;
 };

@@ -3,6 +3,8 @@ if ( ! ( isServer ) ) exitWith {};
 
 params ["_vehObj", ["_respawnWhenNotDead", true], ["_loopInterval", 5]];
 
+private _customCode = [(missionConfigFile >> "GRAD_vehicleRespawn"), typeOf _vehObj, ""] call BIS_fnc_returnConfigEntry;
+
 // STORE THE VEHICLES DIRECTION, POSITION AND TYPE
 private _vehDir = 		 getDir _vehObj;
 private _vehPos = 		 getPos _vehObj;
@@ -14,7 +16,7 @@ diag_log format ["GRAD_simpleVehicleRespawn: adding %1 to respawn, respawns when
 // 5
 [{
 	params ["_args", "_handle"];
-	_args params ["_vehObj", "_vehType", "_vehDir", "_vehPos", "_displayName"];
+	_args params ["_vehObj", "_respawnWhenNotDead", "_vehType", "_vehDir", "_vehPos", "_displayName", "_customCode"];
 
 	if (isNull _vehObj) exitWith {
 			[_handle] call CBA_fnc_removePerFrameHandler;
@@ -24,20 +26,20 @@ diag_log format ["GRAD_simpleVehicleRespawn: adding %1 to respawn, respawns when
 	// diag_log format ["checking %1 for respawn", _displayName];
 
 
-	if ( 
-			_respawnWhenNotDead && 
+	if (
+			_respawnWhenNotDead &&
 			{ ( alive _vehObj ) }
 		) exitWith {
 
 			diag_log format ["checking vehicle %1 for respawn", _vehObj];
-			[_vehType, _vehDir, _vehPos, _handle] call GRAD_simpleVehicleRespawn_fnc_check;
+			[_vehType, _respawnWhenNotDead, _vehDir, _vehPos, _handle, _customCode] call GRAD_simpleVehicleRespawn_fnc_check;
 	};
 
 
 	if ( !( alive _vehObj ) || { !( canMove _vehObj ) } ) exitWith {
 
 			diag_log format ["vehicle %1 dead", _vehObj];
-			[_vehType, _vehDir, _vehPos, _handle] call GRAD_simpleVehicleRespawn_fnc_check;
+			[_vehType, _respawnWhenNotDead, _vehDir, _vehPos, _handle, _customCode] call GRAD_simpleVehicleRespawn_fnc_check;
 	};
 
-}, _loopInterval, [_vehObj, _vehType, _vehDir, _vehPos, _displayName]] call CBA_fnc_addPerFrameHandler;
+}, _loopInterval, [_vehObj, _respawnWhenNotDead, _vehType, _vehDir, _vehPos, _displayName, _customCode]] call CBA_fnc_addPerFrameHandler;
