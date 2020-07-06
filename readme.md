@@ -30,7 +30,7 @@ Further configuration
 ```
 [
   this,   // vehicle
-  false,  // respawns only when dead/cantmove - default is true
+  false,  // false - respawns only when dead/cantmove | true – respawns as soon as space is available
   5       // interval in seconds in which respawn checks for condition
 ] call GRAD_vehicleRespawn_fnc_add;
 ```
@@ -40,7 +40,7 @@ Vehicle will spawn with same classname but *not* with same cargo but empty. To d
 
 ## Custom Code
 
-If you want to execute custom code on the vehicle, e.g. to fill up custom cargo, change skins or whatever put the following in the description.ext
+If you want to execute custom code on the vehicle, e.g. to fill up custom cargo, change skins or whatever put the following in the description.ext and replace myVehicleClassname with the classname of the vehicle for which the code should apply
 
 ```
 class GRAD_vehicleRespawn {
