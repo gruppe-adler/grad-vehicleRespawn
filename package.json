@@ -1,0 +1,10 @@
+{
+    "name": "grad-vehicleRespawn",
+    "contributors": [
+        {
+            "name": "nomisum"
+        }
+    ],
+    "description": "Arma3 Library for vehicle respawn. Needs CBA_A3.",
+    "version": "0.0.1"
+}
